@@ -30,13 +30,19 @@ OWF.ready(function() {
 		});
 
         $("#play").on("click", function() {
+            var cmd = {
+                    action:'play',
+                    dataType:'application/vnd.owf.universe.command'
+                };
+            var data = {
+                    playbackSpeed: 500
+                };
+
             if ($("#eventRadio").is(':checked')) {
-                OWF.Eventing.publish("com.solidyn.universe-commands", "play");
+                OWF.Eventing.publish("com.solidyn.universe-commands", [cmd,data]);
             } else {
                 OWF.Intents.startActivity(
-                    {
-                        action:'play', dataType:'application/vnd.owf.universe.command'
-                    }, {},
+                    cmd, data,
                     function (dest) {
                     }
                 )
@@ -45,13 +51,17 @@ OWF.ready(function() {
         });
 
         $("#pause").on("click", function() {
+            var cmd = {
+                    action:'pause',
+                    dataType:'application/vnd.owf.universe.command'
+                };
+            var data = {};
+
             if ($("#eventRadio").is(':checked')) {
-                OWF.Eventing.publish("com.solidyn.universe-commands", "pause");
+                OWF.Eventing.publish("com.solidyn.universe-commands", [cmd,data]);
             } else {
                 OWF.Intents.startActivity(
-                    {
-                        action:'pause', dataType:'application/vnd.owf.universe.command'
-                    }, {},
+                    cmd, data,
                     function (dest) {
                     }
                 )

@@ -12,11 +12,12 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
     // Subscribe with the OWF framework for play/pause broadcast events
     function subscribeForEvents() {
         // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
+        // The message broadcast is expected to be a 2-element array of the intent data
         OWF.Eventing.subscribe("com.solidyn.universe-commands", function(sender, msg) {
-            if (msg === "pause") {
+            if (msg[0].action === "play") {
+                universe.play(undefined, msg[1].playbackSpeed);
+            } else if (msg[0].action === "pause") {
                 universe.pause();
-            } else if (msg === "play") {
-                universe.play();
             }
         });
     }
@@ -33,7 +34,7 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
                 action: 'play',
                 dataType: 'application/vnd.owf.universe.command'
             }, function (sender, intent, data) {
-                universe.play();
+                universe.play(undefined, data.playbackSpeed);
             }
         );
 
