@@ -9,6 +9,10 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
 		pointCounter += 1;
 	};
 	
+	function removeGroundPoint(id) {
+		universe.removeObject(id);
+	}
+	
 	function initialize() {
 		OWF.Intents.receive(
             {
@@ -22,6 +26,17 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
 					alt = data.alt || 0,
 					name = data.name || pointCounter + 1;
 				addGroundPoint(name, color, size, data.lat, data.lon, alt, function() {});
+            }
+        );
+
+		OWF.Intents.receive(
+            {
+                action: 'remove',
+                dataType: 'application/vnd.owf.universe.objectid'
+            },
+            function (sender, intent, data) {
+                console.log("received data: " + JSON.stringify(data));
+				removeGroundPoint(data.name);
             }
         );
 

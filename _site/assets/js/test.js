@@ -11,17 +11,20 @@ OWF.ready(function() {
 					name: "boulder"
                 },
                 function (dest) {
-                    //dest is an array of destination widget proxies
-                    // if (dest.length > 0) {
-                    //                      for (var i = 0; i < dest.length; i += 1) {
-                    //                          var json = JSON.parse(dest[i].id);
-                    //                          var widgetId = json.id;
-                    //                          var proxy = dest[i].id;
-                    //                          timeReceiverProxies.push(widgetId);
-                    //                      }
-                    //                  } else {
-                    //                      // alert('Intent was canceled');
-                    //                  }
+
+                }
+            )
+		});
+		
+		$("#remove_ground_point").on("click", function() {
+			OWF.Intents.startActivity(
+                {
+                    action:'remove', dataType:'application/vnd.owf.universe.objectid'
+                }, {
+					name: "boulder"
+                },
+                function (dest) {
+
                 }
             )
 		});
