@@ -60,6 +60,8 @@ OWF.ready(function() {
 
         earthExtensions.addSun();
 
+		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions);
+
         // var initialPosition = new UNIVERSE.ECICoordinates(
         //            -14213.99162,
         //            -39987.86471,
@@ -187,52 +189,7 @@ OWF.ready(function() {
             }
         ]);
 
-        // Sets up the Intent to receive the time from an Intent sender
-        // This must also be defined in the descriptor html
-        OWF.Intents.receive(
-            {
-                action: 'time',
-                dataType: 'application/vnd.owf.universe.command'
-            },
-            function (sender, intent, data) {
-                console.log("received data: " + JSON.stringify(data));
-                updateTime(data.dateTime);
-            }
-        );
 
-        var dragging = false;
-
-        OWF.DragAndDrop.onDragStart(function() {
-            dragging = true;
-            $("#universe").addClass("ddOver");
-        });
-
-        OWF.DragAndDrop.onDragStop(function() {
-            dragging = false;
-            $("#universe").removeClass("ddOver");
-        });
-
-        OWF.DragAndDrop.onDrop(function(msg) {
-            console.log("dropped point: " + JSON.stringify(msg.dragDropData));
-            var name = msg.dragDropData.name,
-                lat = msg.dragDropData.lat,
-                lon = msg.dragDropData.lon;
-				alt = msg.dragDropData.alt || 0;
-
-            earthExtensions.addStaticGroundDot(name, name, 0x07B807, 300, lat, lon, alt, function() {});
-        }, this);
-
-        $("#universe").mouseout(function(e) {
-            if (dragging) {
-                OWF.DragAndDrop.setDropEnabled(false);
-            }
-        });
-
-        $("#universe").mouseover(function(e) {
-            if (dragging) {
-                OWF.DragAndDrop.setDropEnabled(true);
-            }
-        });
 
         // OWF.Chrome.insertHeaderButtons({
         //     items:[
