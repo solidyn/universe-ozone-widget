@@ -30,7 +30,6 @@ OWF.ready(function() {
             if ($("#eventRadio").is(':checked')) {
                 OWF.Eventing.publish("com.solidyn.universe-commands", "play");
             } else {
-                // TODO Play by intent
                 OWF.Intents.startActivity(
                     {
                         action:'play', dataType:'application/vnd.owf.universe.command'
@@ -46,7 +45,6 @@ OWF.ready(function() {
             if ($("#eventRadio").is(':checked')) {
                 OWF.Eventing.publish("com.solidyn.universe-commands", "pause");
             } else {
-                // TODO Play by intent
                 OWF.Intents.startActivity(
                     {
                         action:'pause', dataType:'application/vnd.owf.universe.command'
