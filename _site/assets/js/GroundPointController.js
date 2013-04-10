@@ -32,7 +32,7 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
 		OWF.Intents.receive(
             {
                 action: 'remove',
-                dataType: 'application/vnd.owf.universe.objectid'
+                dataType: 'application/com.solidyn.universe.objectid'
             },
             function (sender, intent, data) {
                 console.log("received data: " + JSON.stringify(data));

@@ -19,7 +19,7 @@ OWF.ready(function() {
 		$("#remove_ground_point").on("click", function() {
 			OWF.Intents.startActivity(
                 {
-                    action:'remove', dataType:'application/vnd.owf.universe.objectid'
+                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
                 }, {
 					name: "boulder"
                 },
