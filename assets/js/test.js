@@ -25,5 +25,13 @@ OWF.ready(function() {
                 }
             )
 		});
+
+        $("#play").on("click", function() {
+            OWF.Eventing.publish("com.solidyn.universe-commands", "play");
+        });
+
+        $("#pause").on("click", function() {
+            OWF.Eventing.publish("com.solidyn.universe-commands", "pause");
+        });
 	});
 })

@@ -1,7 +1,7 @@
 
-var OWF = OWF || {};
+var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 
-UNIVERSEWIDGET.playbackController = function(universe, earthExtensions) {
+UNIVERSEWIDGET.PlaybackController = function(universe) {
 
     // Initialize the playback controller
     function initialize() {
@@ -46,4 +46,7 @@ UNIVERSEWIDGET.playbackController = function(universe, earthExtensions) {
             }
         );
     }
+
+    initialize();
+    return this;
 }

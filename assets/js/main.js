@@ -61,6 +61,7 @@ OWF.ready(function() {
         earthExtensions.addSun();
 
 		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions);
+        var playbackController = UNIVERSEWIDGET.PlaybackController(universe);
 
         // var initialPosition = new UNIVERSE.ECICoordinates(
         //            -14213.99162,
