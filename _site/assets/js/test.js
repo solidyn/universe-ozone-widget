@@ -35,7 +35,7 @@ OWF.ready(function() {
                     dataType:'application/vnd.owf.universe.command'
                 };
             var data = {
-                    playbackSpeed: 500
+                    playbackSpeed: $('#playbackSpeedInput').val()
                 };
 
             if ($("#eventRadio").is(':checked')) {
