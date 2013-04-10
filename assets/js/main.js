@@ -12,7 +12,7 @@ OWF.ready(function() {
         var appender = logger.getEffectiveAppenders()[0];
         appender.setThreshold(log4javascript.Level.INFO);
 
-        // initialize the eventing
+        // initialize the eventing for widget state
         var eventMonitor = {};
         eventMonitor.widgetEventingController = Ozone.eventing.Widget.getInstance();
 
@@ -217,8 +217,9 @@ OWF.ready(function() {
             var name = msg.dragDropData.name,
                 lat = msg.dragDropData.lat,
                 lon = msg.dragDropData.lon;
+				alt = msg.dragDropData.alt || 0;
 
-            earthExtensions.addStaticGroundDot(name, name, 0x07B807, 300, lat, lon, 100, function() {});
+            earthExtensions.addStaticGroundDot(name, name, 0x07B807, 300, lat, lon, alt, function() {});
         }, this);
 
         $("#universe").mouseout(function(e) {

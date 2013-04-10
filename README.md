@@ -10,12 +10,12 @@ Use of this widget is allowed under the same license as Universe.js (MIT)
 
 Exposed Methods
 ---------------
-1. Add Ground Point
-2. Add Space Object
-3. Play/Pause
-4. Change Time
-5. Turn on/off Sun Lighting
-6. Turn on orbit tracks for Space Objects
+1. Add Ground Point (Intent and Drag and drop)
+2. Add Space Object (Intent and Drag and drop)
+3. Play/Pause (Intent)
+4. Change Time (Intent)
+5. Turn on/off Sun Lighting (Intent)
+6. Turn on orbit tracks for Space Objects (Intent)
 
 Widget Configuration
 --------------------
