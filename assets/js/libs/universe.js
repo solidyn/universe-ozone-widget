@@ -1827,6 +1827,7 @@ UNIVERSE.UniverseController = function (theRefreshRate) {
     };
 
     this.play = function () {
+		clearTimeout(refreshTimeout);
         // set our last update time to now since this is the first update
         lastUpdateMs = (new Date()).getTime();
         update();
@@ -1933,6 +1934,7 @@ UNIVERSE.Universe = function (time, refreshRate, container) {
         @param {function} newStateChangedCallback
      */
     this.play = function (startTime, newPlaybackSpeed, newStateChangedCallback) {
+    	clearTimeout(updateStateTimeout);
         if (startTime) {
             currentUniverseTime = new Date(startTime);
         }
