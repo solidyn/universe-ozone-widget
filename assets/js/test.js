@@ -27,11 +27,34 @@ OWF.ready(function() {
 		});
 
         $("#play").on("click", function() {
-            OWF.Eventing.publish("com.solidyn.universe-commands", "play");
+            if ($("#eventRadio").is(':checked')) {
+                OWF.Eventing.publish("com.solidyn.universe-commands", "play");
+            } else {
+                // TODO Play by intent
+                OWF.Intents.startActivity(
+                    {
+                        action:'play', dataType:'application/vnd.owf.universe.command'
+                    }, {},
+                    function (dest) {
+                    }
+                )
+            }
+
         });
 
         $("#pause").on("click", function() {
-            OWF.Eventing.publish("com.solidyn.universe-commands", "pause");
+            if ($("#eventRadio").is(':checked')) {
+                OWF.Eventing.publish("com.solidyn.universe-commands", "pause");
+            } else {
+                // TODO Play by intent
+                OWF.Intents.startActivity(
+                    {
+                        action:'pause', dataType:'application/vnd.owf.universe.command'
+                    }, {},
+                    function (dest) {
+                    }
+                )
+            }
         });
 	});
 })
