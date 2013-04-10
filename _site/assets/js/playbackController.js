@@ -16,7 +16,7 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
             if (msg === "pause") {
                 universe.pause();
             } else if (msg === "play") {
-                universe.play(undefined, 500);
+                universe.play();
             }
         });
     }
@@ -33,7 +33,7 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
                 action: 'play',
                 dataType: 'application/vnd.owf.universe.command'
             }, function (sender, intent, data) {
-                universe.play(undefined, 500);
+                universe.play();
             }
         );
 

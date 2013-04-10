@@ -51,6 +51,7 @@ OWF.ready(function() {
         });
 
         var universe = new UNIVERSE.Universe(new Date(), 30, document.getElementById("universe"));
+        universe.setPlaybackSpeed(500);
 
         var earthExtensions = new UNIVERSE.EarthExtensions(universe, false);
 
