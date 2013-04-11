@@ -61,190 +61,38 @@ OWF.ready(function() {
 
         earthExtensions.addSun();
 
+		document.getElementById("universe").getElementsByTagName("canvas")[0].style.position="";
+
 		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions);
         var playbackController = UNIVERSEWIDGET.PlaybackController(universe);
 
-        // var initialPosition = new UNIVERSE.ECICoordinates(
-        //            -14213.99162,
-        //            -39987.86471,
-        //            -1115.314875,
-        //            2.865601523,
-        //            -1.007157587,
-        //            -0.410247122
-        //        );
-        // 
-        //        var date = new Date();
-        //        var epoch = new Date(date);
-        // 
-        //        universe.addJsonGeometryModel("dsp", "assets/models/DSP.json", function() {
-        //            var spaceObject = new UNIVERSE.SpaceObject(
-        //                "space_object_id",
-        //                "space_object_name",
-        //                "dsp",
-        //                function(time, updateState) {
-        //                    time = new Date(universe.getCurrentUniverseTime());
-        //                    var elapsedTime = time - epoch;
-        //                    dt = 100;
-        //                    var location = OrbitPropagator.propagateOrbit(initialPosition, elapsedTime/1000, dt, epoch);
-        //                    //console.log(JSON.stringify(location));
-        //                    return location;
-        //                },
-        //                true,
-        //                true,
-        //                [],
-        //                initialPosition,
-        //                universe,
-        //                earthExtensions
-        //            );
-        //            spaceObject.showVehicle = true;
-        // 
-        //            earthExtensions.addSpaceObject(spaceObject, function() {earthExtensions.showAllOrbitLines(true)});
-        // 
-        //        });
+         // owfdojo.config.dojoBlankHtmlUrl = '../assets/js/blank.html';
 
+		// Global drag and drop support
 
-//        var groundObject = new UNIVERSE.GroundObject("blue_dot", "blue_dot", null, function() {
-//            return CoordinateConversionTools.convertLLAtoECI(
-//                new UNIVERSE.LLACoordinates(40, -104, 1),
-//                CoordinateConversionTools.convertTimeToGMST(universe.getCurrentUniverseTime())
-//            );
-//        })
-//        earthExtensions.addGroundDot(groundObject, 0x0000FF, 500, function () {});
-//
-//        var groundObject2 = new UNIVERSE.GroundObject("green_dot", "green_dot", null, function() {
-//            return CoordinateConversionTools.convertLLAtoECI(
-//                new UNIVERSE.LLACoordinates(50, -95, 1),
-//                CoordinateConversionTools.convertTimeToGMST(universe.getCurrentUniverseTime())
-//            );
-//        })
-//
-//        earthExtensions.addGroundDot(groundObject2, 0x00FF00, 300, function () {});
-//
-//        earthExtensions.addStaticGroundDot("static_object", "name", 0xFF0000, 400, 45, 15, 1000, function () {});
+        var dragging = false;
 
-        // universe.play(date, 5000, function(state) {
-        //             $("#current-time").text(state.currentUniverseTime);
-        //          });
-        
-        // document.getElementById("universe").getElementsByTagName("canvas")[0].style.position="";
+		OWF.DragAndDrop.onDragStart(function() {
+		    dragging = true;
+		    $("#universe").addClass("ddOver");
+		});
 
-        // owfdojo.config.dojoBlankHtmlUrl = '../assets/js/blank.html';
+		OWF.DragAndDrop.onDragStop(function() {
+		    dragging = false;
+		    $("#universe").removeClass("ddOver");
+		});
 
-        // OWF.Preferences.getUserPreference({
-        //             namespace:'com.solidyn.universe',
-        //             name:'showTime',
-        //             onSuccess: function(prefValue) {
-        //                 if(prefValue.value === "true") {
-        //                     $("#universe-time").show();
-        //                 } else {
-        //                     $("#universe-time").hide();
-        //                 }
-        //                 $("#show-time-checkbox").attr("checked", prefValue.value === "true" ? true : false);
-        //             },
-        //             onFailure: function (error, status) {
-        //                 $("#universe-time").show();
-        //                 $("#show-time-checkbox").attr("checked", true);
-        //             }
-        //         });
-        // 
-        //         $("#show-time-checkbox").change(function() {
-        //             var checkbox = $(this);
-        //             OWF.Preferences.setUserPreference({
-        //                 namespace:'com.solidyn.universe',
-        //                 name:'showTime',
-        //                 value: checkbox.is(":checked").toString(),
-        //                 onSuccess: function() {
-        //                     if(checkbox.is(":checked")) {
-        //                         $("#universe-time").show();
-        //                     } else {
-        //                         $("#universe-time").hide();
-        //                     }
-        //                 },
-        //                 onFailure: function(error, status) {
-        //                     $(this).attr("checked", !$(this).is(":checked"));
-        //                 }
-        //             });
-        //         });
-
-        function updateTime(date) {
-            console.log('updating date to: ' + date);
-            universe.setCurrentUniverseTime(date);
-        };
-
-        // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
-        OWF.Eventing.subscribe("universe-commands", function(sender, msg) {
-            logger.info("received command: " + msg + " from " + JSON.stringify(sender));
-            if (msg === "pause") {
-                universe.pause();
-            } else if (msg === "play") {
-                universe.play();
+		$("#universe").mouseout(function(e) {
+            if (dragging) {
+                OWF.DragAndDrop.setDropEnabled(false);
             }
-
         });
 
-        // Registering the function is necessary to make use of the OWF RPC widget proxies
-        // This is making the updateTime method available as an RPC method
-        OWF.RPC.registerFunctions([
-            {
-                name: 'updateTime',
-                fn: updateTime
+        $("#universe").mouseover(function(e) {
+            if (dragging) {
+                OWF.DragAndDrop.setDropEnabled(true);
             }
-        ]);
-
-
-
-        // OWF.Chrome.insertHeaderButtons({
-        //     items:[
-        //         {
-        //             type: 'gear',
-        //             itemId:'gear',
-        //             handler: function(sender, data) {
-        //                 alert('Utility Button Pressed');
-        //             }
-        //         }
-        //     ]
-        // });
-
-//        OWF.Chrome.insertHeaderMenus({
-//            items:[
-//                {
-//                    itemId:'menu1',
-//                    icon: './themes/common/images/skin/exclamation.png', text: 'Menu 1',
-//                    menu: {
-//                        items: [
-//                            {
-//                                itemId:'menu1_menuItem1',
-//                                icon: './themes/common/images/skin/exclamation.png', text: 'Menu Item 1',
-//                                handler: function(sender, data) {
-//                                    alert('You clicked Menu Item 1 from Menu 1.');
-//                                }
-//                            }
-//                        ]
-//                    }
-//                }
-//            ]
-//        });
-
-//        OWF.Chrome.getTitle({
-//            callback: function(msg) {
-//                //msg will always be a json string
-//                var res = JSON.parse(msg);
-//                if (res.success) {
-//                    alert("The title of this widget is: " + res.title);
-//                }
-//            }
-//        });
-
-//        OWF.Chrome.setTitle({
-//            title: "A cool new title",
-//            callback: function (msg) {
-//                //msg will always be a json string
-//                var res = JSON.parse(msg);
-//                if (res.success) {
-//                    alert("The title was changed!")
-//                }
-//            }
-//        });
+        });
 
         OWF.notifyWidgetReady();
     });

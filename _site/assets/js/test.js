@@ -67,5 +67,20 @@ OWF.ready(function() {
                 )
             }
         });
+
+	    owfdojo.query(".point").connect('onmousedown', this, function(e) {
+	        e.preventDefault();
+	        var data = {
+				dataType: "application/vnd.owf.latlonalt",
+	            name: $(e.currentTarget).text(),
+	            lat: $(e.currentTarget).attr("lat"),
+	            lon: $(e.currentTarget).attr("lon")
+	        };
+
+	        OWF.DragAndDrop.startDrag({
+	            dragDropLabel: data.name,
+	            dragDropData: data
+	        });
+	    });
 	});
 })

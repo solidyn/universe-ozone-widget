@@ -3,15 +3,19 @@ var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
 	var earthExtensions = earthExtensions,
 	    pointCounter;
-	
+
 	function addGroundPoint(name, color, size, lat, lon, alt, callback) {
+		color = color || 0x07B807;
+		size = size || 300;
+		alt = alt || 0;
+		name = name || pointCounter + 1;
 		earthExtensions.addStaticGroundDot(name, name, color, size, lat, lon, alt, callback);
 		pointCounter += 1;
-	};
+	}
 	
 	function removeGroundPoint(id) {
 		universe.removeObject(id);
-	}
+	};
 	
 	function initialize() {
 		OWF.Intents.receive(
@@ -21,11 +25,7 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
             },
             function (sender, intent, data) {
                 console.log("received data: " + JSON.stringify(data));
-				var color = data.color || 0x07B807,
-				    size = data.size || 300,
-					alt = data.alt || 0,
-					name = data.name || pointCounter + 1;
-				addGroundPoint(name, color, size, data.lat, data.lon, alt, function() {});
+				addGroundPoint(data.name, data.color, data.size, data.lat, data.lon, data.alt, function() {});
             }
         );
 
@@ -40,42 +40,19 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
             }
         );
 
-        // Sets up the Intent to receive the time from an Intent sender
-        // This must also be defined in the descriptor html
-
-        // var dragging = false;
-        // 
-        //         OWF.DragAndDrop.onDragStart(function() {
-        //             dragging = true;
-        //             $("#universe").addClass("ddOver");
-        //         });
-        // 
-        //         OWF.DragAndDrop.onDragStop(function() {
-        //             dragging = false;
-        //             $("#universe").removeClass("ddOver");
-        //         });
-        // 
-        //         OWF.DragAndDrop.onDrop(function(msg) {
-        //             console.log("dropped point: " + JSON.stringify(msg.dragDropData));
-        //             var name = msg.dragDropData.name,
-        //                 lat = msg.dragDropData.lat,
-        //                 lon = msg.dragDropData.lon;
-        // 				alt = msg.dragDropData.alt || 0;
-        // 
-        //             earthExtensions.addStaticGroundDot(name, name, 0x07B807, 300, lat, lon, alt, function() {});
-        //         }, this);
-        // 
-        //         $("#universe").mouseout(function(e) {
-        //             if (dragging) {
-        //                 OWF.DragAndDrop.setDropEnabled(false);
-        //             }
-        //         });
-        // 
-        //         $("#universe").mouseover(function(e) {
-        //             if (dragging) {
-        //                 OWF.DragAndDrop.setDropEnabled(true);
-        //             }
-        //         });
+        OWF.DragAndDrop.onDrop(function(msg) {
+			if(msg.dragDropData.dataType === "application/vnd.owf.latlonalt") {
+				console.log("dropped point: " + JSON.stringify(msg.dragDropData));
+				addGroundPoint(msg.dragDropData.name,
+							   msg.dragDropData.color,
+							   msg.dragDropData.size,
+							   msg.dragDropData.lat,
+							   msg.dragDropData.lon,
+							   msg.dragDropData.alt,
+							   function () {}
+				);
+			}
+        }, this);
 	}
 	
 	initialize();
