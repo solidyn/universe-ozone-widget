@@ -9,6 +9,12 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
         registerForIntents();
     }
 
+    var functionMap = {};
+    functionMap['play'] = playUniverse;
+    functionMap['pause'] = pauseUniverse;
+    functionMap['setTime'] = setUniverseTime;
+
+
     // Subscribe with the OWF framework for play/pause broadcast events
     function subscribeForEvents() {
         // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
@@ -17,17 +23,15 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
 			if(!$.isArray(msg)) {
 				return;
 			}
-            if (msg[0].action === "play") {
-                universe.play(undefined, msg[1].playbackSpeed);
-            } else if (msg[0].action === "pause") {
-                universe.pause();
+
+            var method = functionMap[msg[0].action];
+
+            if (method) {
+                method(msg[1]);
+            } else {
+                console.log("Action: "+msg[0].action+" not mapped!");
             }
         });
-    }
-
-    // Unsubscribe with the OWF framework for play/pause broadcast events
-    function unsubscribeForEvents() {
-        OWF.Eventing.unsubscribe("com.solidyn.universe-commands");
     }
 
     // Register with the OWF framework as a receiver for playback intents.
@@ -37,7 +41,7 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
                 action: 'play',
                 dataType: 'application/vnd.owf.universe.command'
             }, function (sender, intent, data) {
-                universe.play(undefined, data.playbackSpeed);
+                playUniverse(data);
             }
         );
 
@@ -46,9 +50,30 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
                 action: 'pause',
                 dataType: 'application/vnd.owf.universe.command'
             }, function (sender, intent, data) {
-                universe.pause();
+                pauseUniverse();
             }
         );
+
+        OWF.Intents.receive(
+            {
+                action: 'setTime',
+                dataType: 'application/vnd.owf.universe.command'
+            }, function (sender, intent, data) {
+                setUniverseTime(data);
+            }
+        );
+    }
+
+    function playUniverse(data) {
+        universe.play(undefined, data.playbackSpeed);
+    }
+
+    function pauseUniverse() {
+        universe.pause();
+    }
+
+    function setUniverseTime(data) {
+        universe.setCurrentUniverseTime(data.time);
     }
 
     initialize();

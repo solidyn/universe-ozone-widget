@@ -63,8 +63,8 @@ OWF.ready(function() {
 
 		document.getElementById("universe").getElementsByTagName("canvas")[0].style.position="";
 
-        var playbackController = UNIVERSEWIDGET.PlaybackController(universe);
 		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions);
+        var playbackController = UNIVERSEWIDGET.PlaybackController(universe);
 
          // owfdojo.config.dojoBlankHtmlUrl = '../assets/js/blank.html';
 

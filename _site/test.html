@@ -9,6 +9,7 @@
 
     <link href="assets/css/main.css" type="text/css" rel="stylesheet" />
     <link href="https://localhost:8443/owf/css/dragAndDrop.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="https://localhost:8443/owf/js-min/owf-widget-min.js"></script>
 </head>
 
@@ -16,8 +17,6 @@
 
 <div class="container">
     <div xmlns="http://www.w3.org/1999/html">
-	<input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
-    <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
 	<br>
 	<button id="add_ground_point" type="button">Add Ground Point</button>
 	<button id="remove_ground_point" type="button">Remove Ground Point</button>
@@ -30,11 +29,22 @@
 	</ul>
 
     <p/>
-    <div>
+    <div id="playbackControls">
+        <input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Playback by Eventing</input>
+        <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Playback by Intents</input>
         <p/>
-        <input type="text" id="playbackSpeedInput" name="playbackSpeedInput" value="500"/>
+        <input type="text" id="playbackSpeedInput" name="playbackSpeedInput" value="500">Playback Speed</input>
+        <p/>
         <button id="play" type="button">Play</button>
         <button id="pause" type="button">Pause</button>
+
+        <div id="datetimepicker" class="input-append date">
+            <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="25"/>
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+          </i>
+        </span>
+        </div>
     </div>
 </div>
 </div>
@@ -45,6 +55,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.9.1.min.js"><\/script>')</script>
 
+<script src="assets/js/libs/bootstrap-datetimepicker.min.js"></script>
 <script defer src="assets/js/test.js"></script>
 <!-- end scripts-->
 

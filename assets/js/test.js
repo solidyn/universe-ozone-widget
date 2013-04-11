@@ -98,5 +98,34 @@ OWF.ready(function() {
 	            dragDropData: data
 	        });
 	    });
+
+        $('#datetimepicker').datetimepicker({
+            language: 'pt-BR'
+        });
+
+        // The time changer is utilizing OWF.Intents
+        // This is a point-to-multi-point communication scheme that is configured on the fly
+        // through OWF
+        $('#datetimepicker').on('changeDate', function(e) {
+            console.log("e: " + e.date);
+
+            var cmd = {
+                action:'setTime',
+                dataType:'application/vnd.owf.universe.command'
+            };
+            var data = {
+                time: e.date.toString()
+            };
+
+            if ($("#eventRadio").is(':checked')) {
+                OWF.Eventing.publish("com.solidyn.universe-commands", [cmd,data]);
+            } else {
+                OWF.Intents.startActivity(
+                    cmd, data,
+                    function (dest) {
+                    }
+                )
+            }
+        });
 	});
 })
