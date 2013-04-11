@@ -14,6 +14,9 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
         // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
         // The message broadcast is expected to be a 2-element array of the intent data
         OWF.Eventing.subscribe("com.solidyn.universe-commands", function(sender, msg) {
+			if(!$.isArray(msg)) {
+				return;
+			}
             if (msg[0].action === "play") {
                 universe.play(undefined, msg[1].playbackSpeed);
             } else if (msg[0].action === "pause") {
