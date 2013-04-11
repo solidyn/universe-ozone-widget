@@ -1,8 +1,12 @@
 var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 
-UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
+UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions, functionMap) {
 	var earthExtensions = earthExtensions,
 	    pointCounter;
+
+    function addGroundPointCallback(msg) {
+        addGroundPoint(msg.name, msg.color, msg.size, msg.lat, msg.lon, msg.alt, function(){});
+    }
 
 	function addGroundPoint(name, color, size, lat, lon, alt, callback) {
 		color = color || 0x07B807;
@@ -12,6 +16,10 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
 		earthExtensions.addStaticGroundDot(name, name, color, size, lat, lon, alt, callback);
 		pointCounter += 1;
 	}
+
+    function removeGroundPointCallback(msg) {
+        removeGroundPoint(msg.name);
+    }
 	
 	function removeGroundPoint(id) {
 		universe.removeObject(id);
@@ -40,13 +48,8 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
             }
         );
 
-		OWF.Eventing.subscribe("com.solidyn.universe-commands", function(sender, msg) {
-	        if (msg.action === "addPoint") {
-				addGroundPoint(msg.name, msg.color, msg.size, msg.lat, msg.lon, msg.alt, function() {});
-			} else if(msg.action === "removePoint") {
-				removeGroundPoint(msg.name);
-			}
-		});
+        functionMap['add'] = addGroundPointCallback
+        functionMap['remove'] = removeGroundPointCallback
 
         OWF.DragAndDrop.onDrop(function(msg) {
 			if(msg.dragDropData.dataType === "application/vnd.owf.latlonalt") {

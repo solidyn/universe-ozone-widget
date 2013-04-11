@@ -63,8 +63,22 @@ OWF.ready(function() {
 
 		document.getElementById("universe").getElementsByTagName("canvas")[0].style.position="";
 
-		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions);
-        var playbackController = UNIVERSEWIDGET.PlaybackController(universe);
+        var functionMap = {};
+		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions, functionMap);
+        var playbackController = UNIVERSEWIDGET.PlaybackController(universe, functionMap);
+
+        // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
+        // The message broadcast is expected to be a 2-element array of the intent data
+        OWF.Eventing.subscribe("com.solidyn.universe-commands", function(sender, msg) {
+
+            var method = functionMap[msg.action];
+
+            if (method) {
+                method(msg);
+            } else {
+                console.log("Action: "+msg.action+" not mapped!");
+            }
+        });
 
          // owfdojo.config.dojoBlankHtmlUrl = '../assets/js/blank.html';
 

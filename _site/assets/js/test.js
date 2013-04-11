@@ -2,19 +2,19 @@ OWF.ready(function() {
 	$(document).ready(function() {
 		$("#add_ground_point").on("click", function() {
 			var data = {
+                action: "add",
                 lat: 40,
 				lon: -104,
 				alt: 5280,
 				name: "boulder"
             };
 			if ($("#eventRadio").is(':checked')) {
-				data.action = "addPoint";
 				OWF.Eventing.publish("com.solidyn.universe-commands", data);
 			} else {
 				OWF.Intents.startActivity(
 	                {
 	                    action:'add', dataType:'application/vnd.owf.latlonalt'
-	                }, 
+	                },
 					data,
 	                function (dest) {
 
@@ -25,19 +25,17 @@ OWF.ready(function() {
 		
 		$("#remove_ground_point").on("click", function() {
 			var data = {
+                action: "remove",
 				name: "boulder"
 			};
 
 			if ($("#eventRadio").is(':checked')) {
-				data.action = "removePoint";
 				OWF.Eventing.publish("com.solidyn.universe-commands", data);
 			} else {
 				OWF.Intents.startActivity(
 	                {
 	                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
-	                }, {
-						name: "boulder"
-	                },
+	                }, data,
 	                function (dest) {
 
 	                }
@@ -46,19 +44,19 @@ OWF.ready(function() {
 		});
 
         $("#play").on("click", function() {
-            var cmd = {
-                    action:'play',
-                    dataType:'application/vnd.owf.universe.command'
-                };
             var data = {
+                    action:'play',
                     playbackSpeed: $('#playbackSpeedInput').val()
                 };
 
             if ($("#eventRadio").is(':checked')) {
-                OWF.Eventing.publish("com.solidyn.universe-commands", [cmd,data]);
+                OWF.Eventing.publish("com.solidyn.universe-commands", data);
             } else {
                 OWF.Intents.startActivity(
-                    cmd, data,
+                    {
+                        action:'play',
+                        dataType:'application/vnd.owf.universe.command'
+                    }, data,
                     function (dest) {
                     }
                 )
@@ -67,17 +65,19 @@ OWF.ready(function() {
         });
 
         $("#pause").on("click", function() {
-            var cmd = {
+            var data = {
                     action:'pause',
                     dataType:'application/vnd.owf.universe.command'
                 };
-            var data = {};
 
             if ($("#eventRadio").is(':checked')) {
-                OWF.Eventing.publish("com.solidyn.universe-commands", [cmd,data]);
+                OWF.Eventing.publish("com.solidyn.universe-commands", data);
             } else {
                 OWF.Intents.startActivity(
-                    cmd, data,
+                    {
+                        action:'pause',
+                        dataType:'application/vnd.owf.universe.command'
+                    }, data,
                     function (dest) {
                     }
                 )
@@ -109,19 +109,19 @@ OWF.ready(function() {
         $('#datetimepicker').on('changeDate', function(e) {
             console.log("e: " + e.date);
 
-            var cmd = {
-                action:'setTime',
-                dataType:'application/vnd.owf.universe.command'
-            };
             var data = {
+                action:'setTime',
                 time: e.date.toString()
             };
 
             if ($("#eventRadio").is(':checked')) {
-                OWF.Eventing.publish("com.solidyn.universe-commands", [cmd,data]);
+                OWF.Eventing.publish("com.solidyn.universe-commands", data);
             } else {
                 OWF.Intents.startActivity(
-                    cmd, data,
+                    {
+                        action:'setTime',
+                        dataType:'application/vnd.owf.universe.command'
+                    }, data,
                     function (dest) {
                     }
                 )

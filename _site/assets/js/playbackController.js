@@ -1,7 +1,7 @@
 
 var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 
-UNIVERSEWIDGET.PlaybackController = function(universe) {
+UNIVERSEWIDGET.PlaybackController = function(universe, functionMap) {
 
     // Initialize the playback controller
     function initialize() {
@@ -9,29 +9,11 @@ UNIVERSEWIDGET.PlaybackController = function(universe) {
         registerForIntents();
     }
 
-    var functionMap = {};
-    functionMap['play'] = playUniverse;
-    functionMap['pause'] = pauseUniverse;
-    functionMap['setTime'] = setUniverseTime;
-
-
     // Subscribe with the OWF framework for play/pause broadcast events
     function subscribeForEvents() {
-        // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
-        // The message broadcast is expected to be a 2-element array of the intent data
-        OWF.Eventing.subscribe("com.solidyn.universe-commands", function(sender, msg) {
-			if(!$.isArray(msg)) {
-				return;
-			}
-
-            var method = functionMap[msg[0].action];
-
-            if (method) {
-                method(msg[1]);
-            } else {
-                console.log("Action: "+msg[0].action+" not mapped!");
-            }
-        });
+        functionMap['play'] = playUniverse;
+        functionMap['pause'] = pauseUniverse;
+        functionMap['setTime'] = setUniverseTime;
     }
 
     // Register with the OWF framework as a receiver for playback intents.
