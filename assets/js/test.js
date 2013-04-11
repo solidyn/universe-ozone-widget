@@ -1,32 +1,48 @@
 OWF.ready(function() {
 	$(document).ready(function() {
 		$("#add_ground_point").on("click", function() {
-			OWF.Intents.startActivity(
-                {
-                    action:'add', dataType:'application/vnd.owf.latlonalt'
-                }, {
-                    lat: 40,
-					lon: -104,
-					alt: 5280,
-					name: "boulder"
-                },
-                function (dest) {
+			var data = {
+                lat: 40,
+				lon: -104,
+				alt: 5280,
+				name: "boulder"
+            };
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "addPoint";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'add', dataType:'application/vnd.owf.latlonalt'
+	                }, 
+					data,
+	                function (dest) {
 
-                }
-            )
+	                }
+	            );
+			}
 		});
 		
 		$("#remove_ground_point").on("click", function() {
-			OWF.Intents.startActivity(
-                {
-                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
-                }, {
-					name: "boulder"
-                },
-                function (dest) {
+			var data = {
+				name: "boulder"
+			};
 
-                }
-            )
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "removePoint";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
+	                }, {
+						name: "boulder"
+	                },
+	                function (dest) {
+
+	                }
+            	);
+			}
 		});
 
         $("#play").on("click", function() {

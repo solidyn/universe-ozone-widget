@@ -3,6 +3,9 @@ layout: test_layout
 title: by Solidyn
 ---
 <div xmlns="http://www.w3.org/1999/html">
+	<input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
+    <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
+	
 	<button id="add_ground_point" type="button">Add Ground Point</button>
 	<button id="remove_ground_point" type="button">Remove Ground Point</button>
 	
@@ -15,8 +18,6 @@ title: by Solidyn
 
     <p/>
     <div>
-        <input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Playback by Eventing</input>
-        <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Playback by Intents</input>
         <p/>
         <input type="text" id="playbackSpeedInput" name="playbackSpeedInput" value="500"/>
         <button id="play" type="button">Play</button>

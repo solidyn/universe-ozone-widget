@@ -40,6 +40,14 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions) {
             }
         );
 
+		OWF.Eventing.subscribe("com.solidyn.universe-commands", function(sender, msg) {
+	        if (msg.action === "addPoint") {
+				addGroundPoint(msg.name, msg.color, msg.size, msg.lat, msg.lon, msg.alt, function() {});
+			} else if(msg.action === "removePoint") {
+				removeGroundPoint(msg.name);
+			}
+		});
+
         OWF.DragAndDrop.onDrop(function(msg) {
 			if(msg.dragDropData.dataType === "application/vnd.owf.latlonalt") {
 				console.log("dropped point: " + JSON.stringify(msg.dragDropData));
