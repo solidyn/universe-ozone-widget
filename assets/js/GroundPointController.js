@@ -12,7 +12,7 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions, func
 		color = color || 0x07B807;
 		size = size || 300;
 		alt = alt || 0;
-		name = name || pointCounter + 1;
+		name = name || "ground_" + pointCounter + 1;
 		earthExtensions.addStaticGroundDot(name, name, color, size, lat, lon, alt, callback);
 		pointCounter += 1;
 	}
@@ -48,8 +48,8 @@ UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions, func
             }
         );
 
-        functionMap['add'] = addGroundPointCallback
-        functionMap['remove'] = removeGroundPointCallback
+        functionMap['addGroundObject'] = addGroundPointCallback
+        functionMap['removeGroundObject'] = removeGroundPointCallback
 
         OWF.DragAndDrop.onDrop(function(msg) {
 			if(msg.dragDropData.dataType === "application/vnd.owf.latlonalt") {

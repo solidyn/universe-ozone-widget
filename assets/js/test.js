@@ -2,7 +2,7 @@ OWF.ready(function() {
 	$(document).ready(function() {
 		$("#add_ground_point").on("click", function() {
 			var data = {
-                action: "add",
+                action: "addGroundObject",
                 lat: 40,
 				lon: -104,
 				alt: 5280,
@@ -25,7 +25,7 @@ OWF.ready(function() {
 		
 		$("#remove_ground_point").on("click", function() {
 			var data = {
-                action: "remove",
+                action: "removeGroundObject",
 				name: "boulder"
 			};
 
@@ -73,11 +73,11 @@ OWF.ready(function() {
 		
 		$("#remove_space_object").on("click", function() {
 			var data = {
-				name: "boulder"
+				name: "rock"
 			};
 
 			if ($("#eventRadio").is(':checked')) {
-				data.action = "removePoint";
+				data.action = "removeSpaceObject";
 				OWF.Eventing.publish("com.solidyn.universe-commands", data);
 			} else {
 				OWF.Intents.startActivity(

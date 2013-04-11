@@ -18,6 +18,9 @@
 <div class="container">
     <div xmlns="http://www.w3.org/1999/html">
 	<br>
+	<input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
+    <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
+	<br>
 	<button id="add_ground_point" type="button">Add Ground Point</button>
 	<button id="remove_ground_point" type="button">Remove Ground Point</button>
 	<button id="add_space_object" type="button">Add Space Object</button>
@@ -32,9 +35,6 @@
 
     <p/>
     <div id="playbackControls">
-        <input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Playback by Eventing</input>
-        <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Playback by Intents</input>
-        <p/>
         <input type="text" id="playbackSpeedInput" name="playbackSpeedInput" value="500">Playback Speed</input>
         <p/>
         <button id="play" type="button">Play</button>
