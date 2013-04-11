@@ -147,6 +147,26 @@ OWF.ready(function() {
 	            dragDropData: data
 	        });
 	    });
+	
+		owfdojo.query(".space-object").connect('onmousedown', this, function(e) {
+	        e.preventDefault();
+	        var data = {
+				dataType: "application/vnd.owf.universe.spaceobject",
+	            name: $(e.currentTarget).text(),
+	            x: $(e.currentTarget).attr("x"),
+	            y: $(e.currentTarget).attr("y"),
+				z: $(e.currentTarget).attr("z"),
+				vx: $(e.currentTarget).attr("vx"),
+				vy: $(e.currentTarget).attr("vy"),
+				vz: $(e.currentTarget).attr("vz"),
+				epoch: new Date().toString()
+	        };
+
+	        OWF.DragAndDrop.startDrag({
+	            dragDropLabel: data.name,
+	            dragDropData: data
+	        });
+	    });
 
         $('#datetimepicker').datetimepicker({
             language: 'pt-BR'

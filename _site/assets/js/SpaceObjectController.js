@@ -1,3 +1,4 @@
+
 var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 
 UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, functionMap) {
@@ -37,6 +38,24 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
 
 		functionMap['addSpaceObject'] = addSpaceObjectCallback;
         functionMap['removeSpaceObject'] = removeSpaceObjectCallback;
+
+		OWF.DragAndDrop.onDrop(function(msg) {
+			if(msg.dragDropData.dataType === "application/vnd.owf.universe.spaceobject") {
+				console.log("dropped space object: " + JSON.stringify(msg.dragDropData));
+				addSpaceObject(msg.dragDropData.name,
+							   msg.dragDropData.color,
+							   msg.dragDropData.size,
+							   msg.dragDropData.x,
+							   msg.dragDropData.y,
+							   msg.dragDropData.z,
+							   msg.dragDropData.vx,
+							   msg.dragDropData.vy,
+							   msg.dragDropData.vz,
+							   Date.parse(msg.dragDropData.epoch),
+							   function () {}
+				);
+			}
+        }, this);
 	};
 	
 	
