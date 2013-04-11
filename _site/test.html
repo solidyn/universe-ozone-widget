@@ -10,21 +10,28 @@
     <link href="assets/css/main.css" type="text/css" rel="stylesheet" />
     <link href="https://localhost:8443/owf/css/dragAndDrop.css" rel="stylesheet" type="text/css">
     <link href="assets/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="https://localhost:8443/owf/js-min/owf-widget-min.js"></script>
 </head>
 
 <body>
 
 <div class="container">
-    <div xmlns="http://www.w3.org/1999/html">
-	<br>
-	<input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
-    <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
-	<br>
-	<button id="add_ground_point" type="button">Add Ground Point</button>
-	<button id="remove_ground_point" type="button">Remove Ground Point</button>
-	<button id="add_space_object" type="button">Add Space Object</button>
-	<button id="remove_space_object" type="button">Remove Space Object</button>
+    <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+	<div class="row">
+        <div class="span12">
+	        <input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
+            <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+	        <button class="btn btn-small" id="add_ground_point" type="button">Add Ground Point</button>
+	        <button class="btn btn-small" id="remove_ground_point" type="button">Remove Ground Point</button>
+	        <button class="btn btn-small" id="add_space_object" type="button">Add Space Object</button>
+	        <button class="btn btn-small" id="remove_space_object" type="button">Remove Space Object</button>
+        </div>
+    </div>
 	
 	<h4>Drag a point onto the universe widget</h4>
 	<ul id="point-list" class="unstyled">
@@ -38,19 +45,22 @@
 	    <li class="space-object" x="-14213.99162" y="-39987.86471" z="-1115.314875" vx="2.865601523" vy="-1.007157587" vz="-0.410247122">Space Object 1</li>
 	</ul>
 
-    <p/>
-    <div id="playbackControls">
-        <input type="text" id="playbackSpeedInput" name="playbackSpeedInput" value="500">Playback Speed</input>
-        <p/>
-        <button id="play" type="button">Play</button>
-        <button id="pause" type="button">Pause</button>
+    <h4>Playback Controls</h4>
+    <div class="row" id="playbackControls">
+        <div class="span12">
+           <button class="btn btn-small" id="play" type="button">Play</button>
+           <button class="btn btn-small" id="pause" type="button">Pause</button>
+           <input type="text" id="playbackSpeedInput" name="playbackSpeedInput" value="500">Playback Speed</input>
+        </div>
+     </div>
 
-        <div id="datetimepicker" class="input-append date">
-            <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="25"/>
-        <span class="add-on">
-          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-          </i>
-        </span>
+    <div class="row">
+        <div id="datetimepicker" class="span12 input-append date">
+           <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="25">Set Date</input>
+           <span class="add-on">
+             <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+             </i>
+           </span>
         </div>
     </div>
 </div>
