@@ -35,7 +35,56 @@ OWF.ready(function() {
 				OWF.Intents.startActivity(
 	                {
 	                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
-	                }, data,
+	                },
+					data,
+	                function (dest) {
+
+	                }
+            	);
+			}
+		});
+		
+		$("#add_space_object").on("click", function() {
+			var data = {
+                x: -14213.99162,
+	            y: -39987.86471,
+	            z: -1115.314875,
+	            vx: 2.865601523,
+	            vy: -1.007157587,
+	            vz: -0.410247122,
+				epoch: new Date().toString(),
+				name: "rock"
+            };
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "addSpaceObject";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'add', dataType:'application/vnd.owf.universe.spaceobject'
+	                }, 
+					data,
+	                function (dest) {
+
+	                }
+	            );
+			}
+		});
+		
+		$("#remove_space_object").on("click", function() {
+			var data = {
+				name: "boulder"
+			};
+
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "removePoint";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
+	                },
+					data,
 	                function (dest) {
 
 	                }

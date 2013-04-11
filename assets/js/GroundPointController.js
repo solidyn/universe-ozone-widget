@@ -2,7 +2,7 @@ var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 
 UNIVERSEWIDGET.GroundPointController = function (universe, earthExtensions, functionMap) {
 	var earthExtensions = earthExtensions,
-	    pointCounter;
+	    pointCounter = 0;
 
     function addGroundPointCallback(msg) {
         addGroundPoint(msg.name, msg.color, msg.size, msg.lat, msg.lon, msg.alt, function(){});

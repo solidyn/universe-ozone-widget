@@ -66,6 +66,7 @@ OWF.ready(function() {
         var functionMap = {};
 		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions, functionMap);
         var playbackController = UNIVERSEWIDGET.PlaybackController(universe, functionMap);
+		var spaceObjectController = UNIVERSEWIDGET.SpaceObjectController(universe, earthExtensions);
 
         // This is receiving an Event, i.e. a broadcast message on the universe-commands channel
         // The message broadcast is expected to be a 2-element array of the intent data
