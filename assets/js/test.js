@@ -238,5 +238,28 @@ OWF.ready(function() {
                 )
             }
         });
+
+        $('#sunLightingCheckbox').on('click', function() {
+            var isChecked = $("#sunLightingCheckbox").is(":checked");
+            console.log("Sun clicked: " + isChecked);
+
+            var data = {
+                action:'setSunLighting',
+                sunLightingState:$("#sunLightingCheckbox").is(":checked")
+            }
+
+            if ($("#eventRadio").is(':checked')) {
+                OWF.Eventing.publish("com.solidyn.universe-commands", data);
+            } else {
+                OWF.Intents.startActivity(
+                    {
+                        action:'setSunLighting',
+                        dataType:'application/vnd.owf.universe.command'
+                    }, data,
+                    function (dest) {
+                    }
+                )
+            }
+        });
 	});
 })

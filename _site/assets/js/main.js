@@ -65,7 +65,7 @@ OWF.ready(function() {
 
         var functionMap = {};
 		var groundPointController = UNIVERSEWIDGET.GroundPointController(universe, earthExtensions, functionMap);
-        var playbackController = UNIVERSEWIDGET.PlaybackController(universe, functionMap);
+        var playbackController = UNIVERSEWIDGET.PlaybackController(universe, earthExtensions, functionMap);
 		var spaceObjectController = UNIVERSEWIDGET.SpaceObjectController(universe, earthExtensions, functionMap);
 
         // This is receiving an Event, i.e. a broadcast message on the universe-commands channel

@@ -1,7 +1,7 @@
 
 var UNIVERSEWIDGET = UNIVERSEWIDGET || {};
 
-UNIVERSEWIDGET.PlaybackController = function(universe, functionMap) {
+UNIVERSEWIDGET.PlaybackController = function(universe, earthExtensions, functionMap) {
 
     // Initialize the playback controller
     function initialize() {
@@ -14,6 +14,7 @@ UNIVERSEWIDGET.PlaybackController = function(universe, functionMap) {
         functionMap['play'] = playUniverse;
         functionMap['pause'] = pauseUniverse;
         functionMap['setTime'] = setUniverseTime;
+        functionMap['setSunLighting'] = setSunLighting;
     }
 
     // Register with the OWF framework as a receiver for playback intents.
@@ -44,6 +45,15 @@ UNIVERSEWIDGET.PlaybackController = function(universe, functionMap) {
                 setUniverseTime(data);
             }
         );
+
+        OWF.Intents.receive(
+            {
+                action: 'setSunLighting',
+                dataType: 'application/vnd.owf.universe.command'
+            }, function (sender, intent, data) {
+                setSunLighting(data);
+            }
+        );
     }
 
     function playUniverse(data) {
@@ -56,6 +66,10 @@ UNIVERSEWIDGET.PlaybackController = function(universe, functionMap) {
 
     function setUniverseTime(data) {
         universe.setCurrentUniverseTime(data.time);
+    }
+
+    function setSunLighting(data) {
+        earthExtensions.setSunLighting(data.sunLightingState);
     }
 
     initialize();
