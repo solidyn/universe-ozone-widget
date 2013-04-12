@@ -70,6 +70,7 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 
 		{
 			action = "addSpaceObject",
+			// ECI position and velocity
             x: -14213.99162, // km
             y: -39987.86471,
             z: -1115.314875,
@@ -103,5 +104,112 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 
 		{
 			action: "removePropagationLine",
+			name: "name"
+		}
+		
+Commanding the Universe through Intents
+--------------------------------------
+Intents can be sent to the Universe widget for all of the commands.  The list below defines the intent data type, action and data that should be sent for each command.
+
+* Play
+
+		{
+            action:'play',
+            dataType:'application/vnd.owf.universe.command'
+        }
+        data: {
+            playbackSpeed: 500 // seconds per second
+        }
+* Pause
+
+        {
+            action:'pause',
+            dataType:'application/vnd.owf.universe.command'
+        }
+        data: {}
+* Set Universe Time
+
+		{
+            action:'setTime',
+            dataType:'application/vnd.owf.universe.command'
+        }
+		data: {
+		    time: new Date().toString() // date as a string
+		}
+* Add Ground Object
+
+		{
+		    action:'add',
+			dataType:'application/vnd.owf.latlonalt'
+		}
+		data: {
+		    lat: 40,   // decimal degrees
+			lon: -104, 
+			alt: 0,    // km
+			name: "point name"
+		}
+* Remove ground Object
+
+		{
+		    action:'remove',
+			dataType:'application/com.solidyn.universe.objectid'
+		}		
+		data: {
+			name: "point name"
+		}
+		
+* Add Space Object
+		
+		{
+            action:'add',
+			dataType:'application/vnd.owf.universe.spaceobject'
+        }
+		data: {
+			// ECI position and velocity
+            x: -14213.99162, // km
+            y: -39987.86471,
+            z: -1115.314875,
+            vx: 2.865601523, // km/s
+            vy: -1.007157587,
+            vz: -0.410247122,
+			epoch: new Date().toString(), // date as a string
+			name: "name"
+        }
+
+* Remove Space Object
+		
+		{
+		    action:'remove',
+			dataType:'application/com.solidyn.universe.objectid'
+		}
+		data: {
+			name: "name"
+		}
+		
+* Toggle Sun Lighting
+		
+		{
+            action:'setSunLighting',
+            dataType:'application/vnd.owf.universe.command'
+        }
+		data: {
+            sunLightingState: true // (or false)
+        }
+* Show Orbit Track for Space Object
+
+		{
+		    action:'addPropagationLine',
+		    dataType:'application/com.solidyn.universe.objectid'
+		}
+		data: {
+			name: "name"
+		}
+* Hide Orbit Track for Space Object
+		
+		{
+		    action:'removePropagationLine',
+			dataType:'application/com.solidyn.universe.objectid'
+		}
+		data: {
 			name: "name"
 		}
