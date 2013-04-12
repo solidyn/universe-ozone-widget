@@ -145,7 +145,7 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 		data: {
 		    lat: 40,   // decimal degrees
 			lon: -104, 
-			alt: 0,    // km
+			alt: 1,    // km
 			name: "point name"
 		}
 * Remove ground Object
@@ -213,3 +213,42 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 		data: {
 			name: "name"
 		}
+		
+Drag and Drop
+-------------
+Ground and Space Objects can be added to the Universe Widget through Drag and Drop.
+
+* Ground Objects
+
+		var data = {
+			dataType: "application/vnd.owf.latlonalt",
+            name: "name",
+            lat: 40, // decimal degrees
+            lon: -104,
+			alt: 1 //km
+        };
+
+        OWF.DragAndDrop.startDrag({
+            dragDropLabel: data.name,
+            dragDropData: data
+        });
+
+* Space Objects
+
+		var data = {
+			dataType: "application/vnd.owf.universe.spaceobject",
+            name: "name",
+			// ECI position and velocity
+            x: -14213.99162, // km
+            y: -39987.86471,
+            z: -1115.314875,
+            vx: 2.865601523, // km/s
+            vy: -1.007157587,
+            vz: -0.410247122,
+			epoch: new Date().toString()
+        };
+
+        OWF.DragAndDrop.startDrag({
+            dragDropLabel: data.name,
+            dragDropData: data
+        });
