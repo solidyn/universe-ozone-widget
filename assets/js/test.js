@@ -91,6 +91,48 @@ OWF.ready(function() {
             	);
 			}
 		});
+		
+		$("#add_propagation_line_for_space_object").on("click", function() {
+			var data = {
+				name: "rock"
+			};
+
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "addPropagationLine";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'addPropagationLine', dataType:'application/com.solidyn.universe.objectid'
+	                },
+					data,
+	                function (dest) {
+
+	                }
+            	);
+			}
+		});
+		
+		$("#remove_propagation_line_for_space_object").on("click", function() {
+			var data = {
+				name: "rock"
+			};
+
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "removePropagationLine";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'removePropagationLine', dataType:'application/com.solidyn.universe.objectid'
+	                },
+					data,
+	                function (dest) {
+
+	                }
+            	);
+			}
+		});
 
         $("#play").on("click", function() {
             var data = {

@@ -2,21 +2,18 @@
 layout: test_layout
 title: by Solidyn
 ---
+
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-	<div class="row">
-        <div class="span12">
-	        <input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
-            <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
-        </div>
-    </div>
-    <div class="row">
-        <div class="span12">
-	        <button class="btn btn-small" id="add_ground_point" type="button">Add Ground Point</button>
-	        <button class="btn btn-small" id="remove_ground_point" type="button">Remove Ground Point</button>
-	        <button class="btn btn-small" id="add_space_object" type="button">Add Space Object</button>
-	        <button class="btn btn-small" id="remove_space_object" type="button">Remove Space Object</button>
-        </div>
-    </div>
+	<br>
+	<input id="eventRadio" type="radio" name="playbackMethod" value="event" checked>Eventing</input>
+    <input id="intentRadio" type="radio" name="playbackMethod" value="intent">Intents</input>
+	<br>
+	<button class="btn btn-small" id="add_ground_point" type="button">Add Ground Point</button>
+	<button class="btn btn-small" id="remove_ground_point" type="button">Remove Ground Point</button>
+	<button class="btn btn-small" id="add_space_object" type="button">Add Space Object</button>
+	<button class="btn btn-small" id="remove_space_object" type="button">Remove Space Object</button>
+	<button class="btn btn-small" id="add_propagation_line_for_space_object" type="button">Add Orbit Track</button>
+	<button class="btn btn-small" id="remove_propagation_line_for_space_object" type="button">Remove Orbit Track</button>
 	
 	<h4>Drag a point onto the universe widget</h4>
 	<ul id="point-list" class="unstyled">
@@ -28,6 +25,7 @@ title: by Solidyn
 	<h4>Drag a space object onto the universe widget</h4>
 	<ul id="space-object-list" class="unstyled">
 	    <li class="space-object" x="-14213.99162" y="-39987.86471" z="-1115.314875" vx="2.865601523" vy="-1.007157587" vz="-0.410247122">Space Object 1</li>
+		<li class="space-object" x="-4072.688943" y="1649.411342" z="5123.387157" vx="-1.117761045" vy="-7.462971588" vz="1.514079787">ISS</li>
 	</ul>
 
     <h4>Playback Controls</h4>
