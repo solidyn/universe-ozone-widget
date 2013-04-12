@@ -37,5 +37,19 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 
         {
             action: "play",
-            playbackSpeed: 500
+            playbackSpeed: 500 // seconds per second
         }
+* pause
+
+        {
+            action: "pause"
+        }
+* addGroundPoint
+
+		{
+		    action: "addGroundObject",
+		    lat: 40,   // decimal degrees
+			lon: -104, 
+			alt: 0,    // km
+			name: "boulder"
+		}
