@@ -33,7 +33,8 @@ Commanding the Universe through Events
 --------------------------------------
 Events are sent on the "com.solidyn.universe-commands" channel.  The message sent is a JSON string that contains an action and the data necessary to perform that action.  Below is a listing of the actions and the properties that must be set.
 
-1. play
+* play
+
             {
                 action: "play",
                 playbackSpeed: 500
