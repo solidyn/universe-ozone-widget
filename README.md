@@ -35,7 +35,7 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 
 * play
 
-            {
-                action: "play",
-                playbackSpeed: 500
-            }
+        {
+            action: "play",
+            playbackSpeed: 500
+        }
