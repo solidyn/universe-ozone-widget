@@ -33,23 +33,75 @@ Commanding the Universe through Events
 --------------------------------------
 Events are sent on the "com.solidyn.universe-commands" channel.  The message sent is a JSON string that contains an action and the data necessary to perform that action.  Below is a listing of the actions and the properties that must be set.
 
-* play
+* Play
 
         {
             action: "play",
             playbackSpeed: 500 // seconds per second
         }
-* pause
+* Pause
 
         {
             action: "pause"
         }
-* addGroundPoint
+* Set Universe Time
+
+		{
+		    action:'setTime',
+		    time: new Date().toString() // date as a string
+		}
+* Add Ground Object
 
 		{
 		    action: "addGroundObject",
 		    lat: 40,   // decimal degrees
 			lon: -104, 
 			alt: 0,    // km
-			name: "boulder"
+			name: "point name"
+		}
+* Remove ground Object
+
+		{
+			action: "removeGroundObject",
+			name: "point name"
+		}
+		
+* Add Space Object
+
+		{
+			action = "addSpaceObject",
+            x: -14213.99162, // km
+            y: -39987.86471,
+            z: -1115.314875,
+            vx: 2.865601523, // km/s
+            vy: -1.007157587,
+            vz: -0.410247122,
+			epoch: new Date().toString(), // date as a string
+			name: "name"
+        }
+
+* Remove Space Object
+
+		{
+			action: "removeSpaceObject",
+			name: "name"
+		}
+		
+* Toggle Sun Lighting
+
+		{
+            action:'setSunLighting',
+            sunLightingState: true // (or false)
+        }
+* Show Orbit Track for Space Object
+
+		{
+			action: "addPropagationLine",
+			name: "name"
+		}
+* Hide Orbit Track for Space Object
+
+		{
+			action: "removePropagationLine",
+			name: "name"
 		}
