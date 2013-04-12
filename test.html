@@ -55,4 +55,44 @@ title: by Solidyn
     </div>
     </form>
 
+    <!--
+     Add code to test adding sensor footprint projection to universe.
+     Call earthExtension.addSensorFootprintProjection
+    -->
+    <h4>Plot Sensor Footprint</h4>
+    <div>
+        <label class="checkbox inline" for="ellipseRadio">
+            <input id="ellipseRadio" type="radio" name="sensorShape" value="ellipse" checked> As Ellipse
+        </label>
+
+        <label class="checkbox inline" for="rectangleRadio">
+            <input id="rectangleRadio" type="radio" name="sensorShape" value="rectangle"> As Rectangle
+        </label>
+    </div>
+    <br/>
+    <form class="form-horizontal">
+        <div class="control-group" id="ellipseSensorControls">
+            <label class="control-label" for="semiMajor">Semi-Major</label>
+            <div class="controls">
+                <input id="semiMajor" type="text" placeholder="Semi-Major Axis">
+            </div>
+
+            <label class="control-label" for="semiMinor">Semi-Minor</label>
+            <div class="controls">
+                <input id="semiMinor" type="text" placeholder="Semi-Minor Axis">
+            </div>
+        </div>
+        <div class="control-group" id="rectangularSensorControls" hidden>
+            <label class="control-label" for="rectangleHeight">Height</label>
+            <div class="controls">
+                <input id="rectangleHeight" type="text" placeholder="Rectangle height">
+            </div>
+
+            <label class="control-label" for="rectangleWidth">Width</label>
+            <div class="controls">
+                <input id="rectangleWidth" type="text" placeholder="Rectangle Width">
+            </div>
+        </div>
+    </form>
+
 </div>

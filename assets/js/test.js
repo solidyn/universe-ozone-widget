@@ -261,5 +261,14 @@ OWF.ready(function() {
                 )
             }
         });
+
+        $('#ellipseRadio').on('click', function() {
+            $('#ellipseSensorControls').show();
+            $('#rectangularSensorControls').hide();
+        });
+        $('#rectangleRadio').on('click', function() {
+            $('#ellipseSensorControls').hide();
+            $('#rectangularSensorControls').show();
+        });
 	});
 })
