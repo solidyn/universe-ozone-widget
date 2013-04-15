@@ -67,6 +67,12 @@
             <input type="checkbox" id="sunLightingCheckbox" checked> Enable Sun Lighting
         </label>
     </div>
+
+	<div class="control-group">
+        <label class="checkbox">
+            <input type="checkbox" id="lockCameraCheckbox"> Lock Camera
+        </label>
+    </div>
     </form>
 
     <!--
@@ -107,6 +113,23 @@
                 <input id="rectangleWidth" type="text" placeholder="Rectangle Width">
             </div>
         </div>
+		<div class="control-group" id="sensorRotationControls">
+			<label class="control-label" for="alongTrack">Along Track (degrees)</label>
+            <div class="controls">
+                <input id="alongTrack" type="text" placeholder="Along Track (degrees)">
+            </div>
+
+			<label class="control-label" for="crossTrack">Cross Track (degrees)</label>
+            <div class="controls">
+                <input id="crossTrack" type="text" placeholder="Cross Track (degrees)">
+            </div>
+
+			<label class="control-label" for="radial">Radial (degrees)</label>
+            <div class="controls">
+                <input id="radial" type="text" placeholder="Radial (degrees)">
+            </div>
+		</div>
+		<button class="btn btn-small" id="add_sensor" type="button">Add Sensor</button>
     </form>
 
 </div>

@@ -34,7 +34,7 @@ OWF.ready(function() {
 			} else {
 				OWF.Intents.startActivity(
 	                {
-	                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
+	                    action:'remove', dataType:'application/vnd.owf.universe.objectid'
 	                },
 					data,
 	                function (dest) {
@@ -82,7 +82,7 @@ OWF.ready(function() {
 			} else {
 				OWF.Intents.startActivity(
 	                {
-	                    action:'remove', dataType:'application/com.solidyn.universe.objectid'
+	                    action:'remove', dataType:'application/vnd.owf.universe.objectid'
 	                },
 					data,
 	                function (dest) {
@@ -103,7 +103,7 @@ OWF.ready(function() {
 			} else {
 				OWF.Intents.startActivity(
 	                {
-	                    action:'addPropagationLine', dataType:'application/com.solidyn.universe.objectid'
+	                    action:'addPropagationLine', dataType:'application/vnd.owf.universe.objectid'
 	                },
 					data,
 	                function (dest) {
@@ -124,7 +124,7 @@ OWF.ready(function() {
 			} else {
 				OWF.Intents.startActivity(
 	                {
-	                    action:'removePropagationLine', dataType:'application/com.solidyn.universe.objectid'
+	                    action:'removePropagationLine', dataType:'application/vnd.owf.universe.objectid'
 	                },
 					data,
 	                function (dest) {
@@ -262,6 +262,31 @@ OWF.ready(function() {
             }
         });
 
+		
+
+        $('#lockCameraCheckbox').on('click', function() {
+            var isChecked = $("#lockCameraCheckbox").is(":checked");
+            console.log("Lock Camera clicked: " + isChecked);
+
+            var data = {
+                action:'lockCamera',
+                lockCameraState:$("#lockCameraCheckbox").is(":checked")
+            }
+
+            if ($("#eventRadio").is(':checked')) {
+                OWF.Eventing.publish("com.solidyn.universe-commands", data);
+            } else {
+                OWF.Intents.startActivity(
+                    {
+                        action:'lockCamera',
+                        dataType:'application/vnd.owf.universe.command'
+                    }, data,
+                    function (dest) {
+                    }
+                )
+            }
+        });
+
         $('#ellipseRadio').on('click', function() {
             $('#ellipseSensorControls').show();
             $('#rectangularSensorControls').hide();
@@ -270,5 +295,43 @@ OWF.ready(function() {
             $('#ellipseSensorControls').hide();
             $('#rectangularSensorControls').show();
         });
+
+		$("#add_sensor").on("click", function() {
+			var data = {
+				object: "rock"
+			};
+			
+			if ($('#ellipseRadio').is(":checked")) {
+				data.sensorType = "ellipse";
+				data.name = "ellipse";
+				data.semiMajor = $("#semiMajor").val();
+				data.semiMinor = $("#semiMinor").val();
+			} else if($('#rectangleRadio').is(":checked")) {
+				data.name = "rectangle";
+				data.sensorType = "rectangle";
+				data.height = $("#rectangleHeight").val();
+				data.width = $("#rectangleWidth").val();
+			}
+			
+			data.alongTrack = $("#alongTrack").val();
+			data.crossTrack = $("#crossTrack").val();
+			data.radial = $("#radial").val();
+
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "addSensor";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'add',
+						dataType:'application/vnd.owf.universe.sensor'
+	                }, 
+					data,
+	                function (dest) {
+
+	                }
+	            );
+			}
+		});
 	});
 })

@@ -15,6 +15,7 @@ UNIVERSEWIDGET.PlaybackController = function(universe, earthExtensions, function
         functionMap['pause'] = pauseUniverse;
         functionMap['setTime'] = setUniverseTime;
         functionMap['setSunLighting'] = setSunLighting;
+		functionMap['lockCamera'] = lockCamera;
     }
 
     // Register with the OWF framework as a receiver for playback intents.
@@ -54,6 +55,15 @@ UNIVERSEWIDGET.PlaybackController = function(universe, earthExtensions, function
                 setSunLighting(data);
             }
         );
+
+        OWF.Intents.receive(
+            {
+                action: 'lockCamera',
+                dataType: 'application/vnd.owf.universe.command'
+            }, function (sender, intent, data) {
+                lockCamera(data);
+            }
+        );
     }
 
     function playUniverse(data) {
@@ -71,6 +81,10 @@ UNIVERSEWIDGET.PlaybackController = function(universe, earthExtensions, function
     function setSunLighting(data) {
         earthExtensions.setSunLighting(data.sunLightingState);
     }
+
+	function lockCamera(data) {
+		earthExtensions.lockCameraPositionRelativeToEarth(data.lockCameraState);
+	}
 
     initialize();
     return this;

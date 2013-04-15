@@ -46,6 +46,36 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
 		earthExtensions.showOrbitLineForObject(false, id);
 	}
 	
+	function addSensorCallback(msg) {
+		if (msg.sensorType === "ellipse") {
+			addEllipseSensor(msg.name, msg.object, msg.semiMajor, msg.semiMinor, msg.alongTrack, msg.crossTrack, msg.radial);
+		} else if (msg.sensorType === "rectangle") {
+			addRectangleSensor(msg.name, msg.object, msg.height, msg.width, msg.alongTrack, msg.crossTrack, msg.radial);
+		}
+	}
+	
+	function addEllipseSensor(name, object, semiMajor, semiMinor, alongTrack, crossTrack, radial) {
+		var shape = new UNIVERSE.EllipseSensorShape(name, semiMajor, semiMinor);
+		var sensor = new UNIVERSE.Sensor(name, shape);
+		sensor.rotateSensorAboutAlongTrackVector(alongTrack);
+		sensor.rotateSensorAboutCrossTrackVector(crossTrack);
+		sensor.rotateSensorAboutRadialVector(radial);
+		earthExtensions.addSensorFootprintProjection(sensor, spaceObjects[object]);
+		earthExtensions.showSensorFootprintProjectionsForId(true, object);
+		earthExtensions.showAllSensorFootprintProjections(true);
+	}
+	
+	function addRectangleSensor(name, object, height, width, alongTrack, crossTrack, radial) {
+		var shape = new UNIVERSE.RectangleSensorShape(name, width, height);
+		var sensor = new UNIVERSE.Sensor(name, shape);
+		sensor.rotateSensorAboutAlongTrackVector(alongTrack);
+		sensor.rotateSensorAboutCrossTrackVector(crossTrack);
+		sensor.rotateSensorAboutRadialVector(radial);
+		earthExtensions.addSensorFootprintProjection(sensor, spaceObjects[object]);
+		earthExtensions.showSensorFootprintProjectionsForId(true, object);	
+		earthExtensions.showAllSensorFootprintProjections(true);
+	}
+	
 	function initialize() {
 		OWF.Intents.receive(
             {
@@ -61,7 +91,7 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
 		OWF.Intents.receive(
             {
                 action: 'addPropagationLine',
-                dataType: 'application/com.solidyn.universe.objectid'
+                dataType: 'application/vnd.owf.universe.objectid'
             },
             function (sender, intent, data) {
 				addPropagationLineCallback(data);
@@ -71,10 +101,20 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
 		OWF.Intents.receive(
             {
                 action: 'removePropagationLine',
-                dataType: 'application/com.solidyn.universe.objectid'
+                dataType: 'application/vnd.owf.universe.objectid'
             },
             function (sender, intent, data) {
 				removePropagationLineCallback(data);
+            }
+        );
+
+		OWF.Intents.receive(
+            {
+                action: 'add',
+                dataType: 'application/vnd.owf.universe.sensor'
+            },
+            function (sender, intent, data) {
+				addSensorCallback(data);
             }
         );
 
@@ -82,6 +122,7 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
         functionMap['removeSpaceObject'] = removeSpaceObjectCallback;
         functionMap['addPropagationLine'] = addPropagationLineCallback;
         functionMap['removePropagationLine'] = removePropagationLineCallback;
+		functionMap['addSensor'] = addSensorCallback;
 
 		OWF.DragAndDrop.onDrop(function(msg) {
 			if(msg.dragDropData.dataType === "application/vnd.owf.universe.spaceobject") {

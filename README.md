@@ -88,12 +88,48 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 			name: "name"
 		}
 		
+* Add an Ellipse-shaped Sensor To A Space Object
+
+		{
+			action: "addSensor",
+			object: "id", // Space object id to add sensor for
+			sensorType: "ellipse",
+			name: "ellipse-sensor",
+			semiMajor: 3, // decimal degrees
+			semiMinor: 2,
+			alongTrack: 3, // decimal degrees of rotation around the axis
+			crossTrack: 4,
+			radial: 20
+		}
+
+* Add a Rectangle-shaped Sensor To A Space Object
+
+		{
+			action: "addSensor",
+			object: "id", // Space object id to add sensor for
+			sensorType: "rectangle",
+			name: "rectangle-sensor",
+			height: 3, // decimal degrees
+			width: 2,
+			alongTrack: 3, // decimal degrees of rotation around the axis
+			crossTrack: 4,
+			radial: 20
+		}
+		
 * Toggle Sun Lighting
 
 		{
             action:'setSunLighting',
             sunLightingState: true // (or false)
         }
+
+* Lock Camera Relative To Earth
+
+		{
+		    action: 'lockCamera',
+		    lockCameraState: true // (or false)
+		}
+
 * Show Orbit Track for Space Object
 
 		{
@@ -152,7 +188,7 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 
 		{
 		    action:'remove',
-			dataType:'application/com.solidyn.universe.objectid'
+			dataType:'application/vnd.owf.universe.objectid'
 		}		
 		data: {
 			name: "point name"
@@ -180,10 +216,44 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 		
 		{
 		    action:'remove',
-			dataType:'application/com.solidyn.universe.objectid'
+			dataType:'application/vnd.owf.universe.objectid'
 		}
 		data: {
 			name: "name"
+		}
+		
+* Add an Ellipse-shaped Sensor To A Space Object
+
+		{
+			action: "addSensor",
+			dataType:"application/vnd.owf.universe.command"
+		}
+		data: {
+			object: "id", // Space object id to add sensor for
+			sensorType: "ellipse",
+			name: "ellipse-sensor",
+			semiMajor: 3, // decimal degrees
+			semiMinor: 2,
+			alongTrack: 3, // decimal degrees of rotation around the axis
+			crossTrack: 4,
+			radial: 20
+		}
+
+* Add a Rectangle-shaped Sensor To A Space Object
+
+		{
+			action: "addSensor",
+			dataType:"application/vnd.owf.universe.command"
+		}
+		data: {
+			object: "id", // Space object id to add sensor for
+			sensorType: "rectangle",
+			name: "rectangle-sensor",
+			height: 3, // decimal degrees
+			width: 2,
+			alongTrack: 3, // decimal degrees of rotation around the axis
+			crossTrack: 4,
+			radial: 20
 		}
 		
 * Toggle Sun Lighting
@@ -195,11 +265,22 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 		data: {
             sunLightingState: true // (or false)
         }
+
+* Lock Camera Relative To Earth
+
+		{
+		    action: 'lockCamera',
+			dataType:'application/vnd.owf.universe.command'
+        }
+		data: {
+		    lockCameraState: true // (or false)
+		}
+				
 * Show Orbit Track for Space Object
 
 		{
 		    action:'addPropagationLine',
-		    dataType:'application/com.solidyn.universe.objectid'
+		    dataType:'application/vnd.owf.universe.objectid'
 		}
 		data: {
 			name: "name"
@@ -208,7 +289,7 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 		
 		{
 		    action:'removePropagationLine',
-			dataType:'application/com.solidyn.universe.objectid'
+			dataType:'application/vnd.owf.universe.objectid'
 		}
 		data: {
 			name: "name"

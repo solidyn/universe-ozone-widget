@@ -43,7 +43,7 @@
 				{
 	                "action":"remove",
 	                "dataTypes":[
-	                    "application/com.solidyn.universe.objectid"
+	                    "application/vnd.owf.universe.objectid"
 	                ]
 	            },
 				{
@@ -55,15 +55,21 @@
                 {
 	                "action":"addPropagationLine",
 	                "dataTypes":[
-	                    "application/com.solidyn.universe.objectid"
+	                    "application/vnd.owf.universe.objectid"
 	                ]
 	            },
 				{
 	                "action":"removePropagationLine",
 	                "dataTypes":[
-	                    "application/com.solidyn.universe.objectid"
+	                    "application/vnd.owf.universe.objectid"
 	                ]
 	            },
+				{
+                    "action":"add",
+                    "dataTypes":[
+                        "application/vnd.owf.universe.sensor"
+                    ]
+                },
 				{
                     "action":"play",
                     "dataTypes":[
@@ -84,6 +90,12 @@
                 },
                 {
                     "action":"setSunLighting",
+                    "dataTypes":[
+                        "application/vnd.owf.universe.command"
+                    ]
+                },
+	            {
+                    "action":"lockCamera",
                     "dataTypes":[
                         "application/vnd.owf.universe.command"
                     ]
