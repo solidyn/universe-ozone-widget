@@ -88,7 +88,7 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 			name: "name"
 		}
 		
-* Add an Ellipse-shaped Sensor To A Space Object
+* Add an Ellipse-shaped Sensor To a Space Object
 
 		{
 			action: "addSensor",
@@ -102,7 +102,7 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 			radial: 20
 		}
 
-* Add a Rectangle-shaped Sensor To A Space Object
+* Add a Rectangle-shaped Sensor To a Space Object
 
 		{
 			action: "addSensor",
@@ -114,6 +114,14 @@ Events are sent on the "com.solidyn.universe-commands" channel.  The message sen
 			alongTrack: 3, // decimal degrees of rotation around the axis
 			crossTrack: 4,
 			radial: 20
+		}
+		
+* Remove a Sensor From a Space Object
+
+		{
+			action: "removeSensor",
+			object: "id", // Space object id to remove sensor from
+			name: "rectangle-sensor" // sensor name
 		}
 		
 * Toggle Sun Lighting
@@ -222,7 +230,7 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 			name: "name"
 		}
 		
-* Add an Ellipse-shaped Sensor To A Space Object
+* Add an Ellipse-shaped Sensor To a Space Object
 
 		{
 			action: "addSensor",
@@ -239,7 +247,7 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 			radial: 20
 		}
 
-* Add a Rectangle-shaped Sensor To A Space Object
+* Add a Rectangle-shaped Sensor To a Space Object
 
 		{
 			action: "addSensor",
@@ -254,6 +262,17 @@ Intents can be sent to the Universe widget for all of the commands.  The list be
 			alongTrack: 3, // decimal degrees of rotation around the axis
 			crossTrack: 4,
 			radial: 20
+		}
+		
+* Remove a Sensor From a Space Object
+
+		{
+			action: "removeSensor",
+			dataType:"application/vnd.owf.universe.command"
+		}
+		data: {
+			object: "id", // Space object id to remove sensor from
+			name: "rectangle-sensor", // name of the sensor
 		}
 		
 * Toggle Sun Lighting

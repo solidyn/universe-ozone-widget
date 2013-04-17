@@ -76,6 +76,10 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
 		earthExtensions.showAllSensorFootprintProjections(true);
 	}
 	
+	function removeSensorCallback(msg) {
+		universe.removeObject(msg.object + "_footprint_" + msg.name);
+	}
+	
 	function initialize() {
 		OWF.Intents.receive(
             {
@@ -118,11 +122,22 @@ UNIVERSEWIDGET.SpaceObjectController = function (universe, earthExtensions, func
             }
         );
 
+		OWF.Intents.receive(
+            {
+                action: 'remove',
+                dataType: 'application/vnd.owf.universe.sensor'
+            },
+            function (sender, intent, data) {
+				removeSensorCallback(data);
+            }
+        );
+
 		functionMap['addSpaceObject'] = addSpaceObjectCallback;
         functionMap['removeSpaceObject'] = removeSpaceObjectCallback;
         functionMap['addPropagationLine'] = addPropagationLineCallback;
         functionMap['removePropagationLine'] = removePropagationLineCallback;
 		functionMap['addSensor'] = addSensorCallback;
+		functionMap['removeSensor'] = removeSensorCallback;
 
 		OWF.DragAndDrop.onDrop(function(msg) {
 			if(msg.dragDropData.dataType === "application/vnd.owf.universe.spaceobject") {

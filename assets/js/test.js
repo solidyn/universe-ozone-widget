@@ -333,5 +333,33 @@ OWF.ready(function() {
 	            );
 			}
 		});
+		
+		$("#remove_sensor").on("click", function() {
+			var data = {
+				object: "rock"
+			};
+			
+			if ($('#ellipseRadio').is(":checked")) {
+				data.name = "ellipse";
+			} else if($('#rectangleRadio').is(":checked")) {
+				data.name = "rectangle";
+			}
+			
+			if ($("#eventRadio").is(':checked')) {
+				data.action = "removeSensor";
+				OWF.Eventing.publish("com.solidyn.universe-commands", data);
+			} else {
+				OWF.Intents.startActivity(
+	                {
+	                    action:'remove',
+						dataType:'application/vnd.owf.universe.sensor'
+	                }, 
+					data,
+	                function (dest) {
+
+	                }
+	            );
+			}
+		});
 	});
 })
