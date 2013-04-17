@@ -14,11 +14,11 @@
 }
 
 .ddBoxCannotDrop {
-    background: #FFFFFF url('../images/dragAndDrop/dndNoMove.png') no-repeat left center;
+    background: #FFFFFF url('../img/dndNoMove.png') no-repeat left center;
 }
 
 .ddBoxCanDrop {
-    background: #FFFFFF url('../images/dragAndDrop/dndMove.png') no-repeat left center;
+    background: #FFFFFF url('../img/dndMove.png') no-repeat left center;
 }
 
 .ddOver {
